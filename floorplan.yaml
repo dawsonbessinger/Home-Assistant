@@ -1,0 +1,47 @@
+      name: Floorplan
+      image: /local/custom_ui/floorplan/floorplan.svg
+      stylesheet: /local/custom_ui/floorplan/floorplan.css
+
+      groups:
+
+        - name: lights
+          entities:
+            - light.family_room_1
+            - light.family_room_2
+            - light.floor_lamp_1
+            - light.floor_lamp_2
+            - light.kitchen_1
+            - light.kitchen_2
+            - light.kitchen_3
+            - light.kitchen_4
+            - light.kitchen_5
+            - light.kitchen_6
+            - light.living_can_1
+            - light.living_can_2
+            - light.living_can_3
+            - light.living_can_4
+            - light.living_can_5
+            - light.living_can_6
+            - light.living_can_7
+            - light.garage_1
+            - light.garage_2
+            - light.garage_3
+          states:
+            - state: 'on'
+              class: 'light-on'
+            - state: 'off'
+              class: 'light-off'
+        
+        - name: switches
+          entities:
+            - switch.sink_light
+            - switch.cabinet_lights
+            - switch.hallway_light
+            - switch.stairway_lights
+            - switch.table_lights
+            - switch.front_house_lights
+          states:
+            - state: 'on'
+              class: 'light-on'
+            - state: 'off'
+              class: 'light-off'

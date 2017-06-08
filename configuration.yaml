@@ -1,0 +1,151 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret sun_latitude
+  longitude: !secret sun_longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 301
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Chicago
+  # Custom icons
+  customize: !include customizations.yaml
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+
+zone:
+  name: Home
+  latitude: !secret zone_home_latitude
+  longitude: !secret zone_home_longitude
+  radius: 250
+  icon: mdi:home
+
+zone 2:
+  name: Work
+  latitude: !secret zone_work_latitude
+  longitude: !secret zone_work_longitude
+  radius: 250
+  icon: mdi:domain
+  
+http:
+  api_password: !secret api_password
+  ssl_certificate: !secret ssl_certificate
+  ssl_key: !secret ssl_key
+  ip_ban_enabled: True
+  login_attempts_threshold: 5
+
+# Checks for available updates
+updater:
+
+#iOS App
+ios:
+
+# Automations Front End
+input_boolean: !include input-boolean.yaml
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+# Automation Scripts
+script: !include scripts.yaml
+
+# Text to speech
+#tts:
+#  platform: google
+
+# Smartthings Bridge
+mqtt:
+  broker: localhost
+  port: !secret mqtt_port
+  client_id: home-assistant-1
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+
+# Notifications
+notify:
+  - platform: pushover
+    name: pushover
+    api_key: !secret pushover_api_key
+    user_key: !secret pushover_user_key
+
+logger: !include loggers.yaml
+
+recorder:
+  purge_days: 2
+  
+# Components  
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+
+light: !include lights.yaml
+
+cover:
+  - platform: mqtt
+    name: "Garage Door"
+    state_topic: 'smartthings/Garage Door/contact'
+    command_topic: 'smartthings/Garage Door/door'
+    state_open: 'open'
+    state_closed: 'closed'
+    payload_open: 'open'
+    payload_close: 'closed'
+    retain: true
+    optimistic: true
+
+binary_sensor: !include binary_sensors.yaml  
+
+panel_custom: !include panel_custom.yaml
+     
+switch: !include switches.yaml
+
+sensor: !include sensors.yaml
+
+lock: !include locks.yaml
+
+camera:
+  - platform: mjpeg
+    mjpeg_url: !secret camera_garage_url
+    name: Garage Camera
+    username: !secret camera_garage_username
+    password: !secret camera_garage_password
+    authentication: basic
+
+bloomsky:
+  api_key: !secret bloomsky_api_key
+
+# Display
+group: !include groups.yaml
+
+# Automation
+scene: !include_dir_list scenes
+
+automation: !include automations.yaml
+
+config:
+
+# media_player: !include media_players.yaml
+
+ifttt:
+  key: !secret ifttt_key
+
+
+# Controls
+input_slider: !include input_sliders.yaml

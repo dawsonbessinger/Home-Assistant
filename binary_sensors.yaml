@@ -1,0 +1,69 @@
+- platform: mqtt
+  state_topic: "smartthings/Basement/motion"
+  name: "Basement Motion"
+  payload_on: "active"
+  payload_off: "inactive"
+  sensor_class: motion
+- platform: mqtt
+  state_topic: "smartthings/Nursery Sensor/motion"
+  name: "Nursery Motion"
+  payload_on: "active"
+  payload_off: "inactive"
+  sensor_class: motion
+- platform: mqtt
+  state_topic: "smartthings/Front Door/motion"
+  name: "Front Door Motion"
+  payload_on: "active"
+  payload_off: "inactive"
+  sensor_class: motion
+- platform: mqtt
+  state_topic: "smartthings/Front Door Foscam/motion"
+  name: "Front Door Foscam"
+  payload_on: "active"
+  payload_off: "inactive"
+  sensor_class: motion
+- platform: mqtt
+  state_topic: "smartthings/Garage Foscam/motion"
+  name: "Garage Foscam"
+  payload_on: "active"
+  payload_off: "inactive"
+  sensor_class: motion
+- platform: mqtt
+  state_topic: "smartthings/Jack's Crib Foscam/motion"
+  name: "Jack's Crib Motion"
+  payload_on: "active"
+  payload_off: "inactive"
+  sensor_class: motion
+- platform: mqtt
+  state_topic: "smartthings/Lilly's Crib Foscam/motion"
+  name: "Lilly's Crib Motion"
+  payload_on: "active"
+  payload_off: "inactive"
+  sensor_class: motion
+- platform: mqtt
+  state_topic: "smartthings/Garage Motion/motion"
+  name: "Garage Sensor Motion"
+  payload_on: "active"
+  payload_off: "inactive"
+  sensor_class: motion
+- platform: mqtt
+  state_topic: "smartthings/Garage Motion 2/motion"
+  name: "Garage Sensor Motion 2"
+  payload_on: "active"
+  payload_off: "inactive"
+  sensor_class: motion
+- platform: mqtt
+  state_topic: "smartthings/Service Door Sensor/contact"  
+  name: "Garage Service Door"
+  payload_on: "closed"
+  payload_off: "open"
+  sensor_class: opening
+- platform: mqtt
+  state_topic: "smartthings/Patio Door Sensor/contact"  
+  name: "Patio Door"
+  payload_on: "closed"
+  payload_off: "open"
+  sensor_class: opening
+- platform: mqtt
+  state_topic: "dummy/floorplan/sensor"
+  name: "Floorplan"

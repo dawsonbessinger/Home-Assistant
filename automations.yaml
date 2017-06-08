@@ -1,0 +1,581 @@
+# BRIGHTNESS AUTOMATIONS
+- id: brightness-basement
+  alias: Brightness Basement
+  trigger:
+    platform: state
+    entity_id: input_slider.brightness_basement
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id:
+        - light.fireplace_dimmer
+        - light.basement_dimmer
+        - light.basement_lamp
+      brightness: '{{ states.input_slider.brightness_basement.state | int }}'
+
+- id: brightness-bedroom
+  alias: Brightness Bedroom
+  trigger:
+    platform: state
+    entity_id: input_slider.brightness_bedroom
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id:
+        - light.bedroom_1
+        - light.bedroom_2
+      brightness: '{{ states.input_slider.brightness_bedroom.state | int }}'
+
+- id: brightness-color-lights
+  alias: Brightness Color Lights
+  trigger:
+    platform: state
+    entity_id: input_slider.brightness_color_lights
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id:
+        - light.color_lights
+      brightness: '{{ states.input_slider.brightness_color_lights.state | int }}' 
+  
+- id: brightness-dining-room
+  alias: Brightness Dining Room
+  trigger:
+    platform: state
+    entity_id: input_slider.brightness_dining_room
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id: light.dining_room
+      brightness: '{{ states.input_slider.brightness_dining_room.state | int }}'
+
+- id: brightness-family-room
+  alias: Brightness Family Room
+  trigger:
+    platform: state
+    entity_id: input_slider.brightness_family_room
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id:
+        - light.family_room_1
+        - light.family_room_2
+      brightness: '{{ states.input_slider.brightness_family_room.state | int }}'
+
+- id: brightness-floor-lamps
+  alias: Brightness Floor Lamps
+  trigger:
+    platform: state
+    entity_id: input_slider.brightness_floor_lamps
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id: light.floor_lamps
+      brightness: '{{ states.input_slider.brightness_floor_lamps.state | int }}'
+  
+- id: brightness-garage-lights
+  alias: Brightness Garage Lights
+  trigger:
+    platform: state
+    entity_id: input_slider.brightness_garage_lights
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id:
+        - light.garage
+      brightness: '{{ states.input_slider.brightness_garage_lights.state | int }}'
+
+- id: brightness-kitchen
+  alias: Brightness Kitchen
+  trigger:
+    platform: state
+    entity_id: input_slider.brightness_kitchen
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id:
+        - light.kitchen_1
+        - light.kitchen_2
+        - light.kitchen_3
+        - light.kitchen_4
+        - light.kitchen_5
+        - light.kitchen_6
+      brightness: '{{ states.input_slider.brightness_kitchen.state | int }}'
+
+- id: brightness-living-room
+  alias: Brightness Living Room
+  trigger:
+    platform: state
+    entity_id: input_slider.brightness_living_room
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id: light.living_room
+      brightness: '{{ states.input_slider.brightness_living_room.state | int }}'
+
+- id: brightness-nursery-lamp
+  alias: Brightness Nursery Lamp
+  trigger:
+    platform: state
+    entity_id: input_slider.brightness_nursery_lamp
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id: light.nursery_lamp
+      brightness: '{{ states.input_slider.brightness_nursery_lamp.state | int }}'
+
+- id: brightness-table-lights
+  alias: Brightness Table Lights
+  trigger:
+    platform: state
+    entity_id: input_slider.brightness_table_lights
+  action:
+    service: switch.turn_on
+    data_template:
+      entity_id:
+        - switch.table_lights
+      brightness: '{{ states.input_slider.brightness_table_lights.state | int }}'
+
+# FRONT DOOR AND FRONT LIGHTS AUTOMATIONS
+- id: front-door-auto-lock
+  alias: lock front door after hours
+  trigger:
+    platform: state
+    entity_id: lock.front_door_lock
+    state: 'unlocked'
+    for:
+      minutes: 30
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.auto_lock_front_door
+        state: 'on'
+      - condition: or
+        conditions:
+        - condition: time
+          after: '23:00:00'
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - fri
+            - sat
+            - sun
+        - condition: time
+          after: '09:00:00'
+          before: '17:30:00'
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - fri
+  action:
+    - service: lock.lock  
+      entity_id: lock.front_door_lock  
+    - service: notify.ios_chris_iphone
+      data:
+        message: "Your front door has been locked due to time!"
+        data:
+          push:
+            badge: 0
+    
+- id: front-door-unlocked-notify
+  alias: notify front door unlocked after hours
+  trigger:
+    platform: state
+    entity_id: lock.front_door_lock
+    state: 'unlocked'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.notify_front_door_unlocked
+        state: 'on'
+      - condition: or
+        conditions:
+        - condition: time
+          after: '20:00:00'
+        - condition: time
+          after: '09:00:00'
+          before: '17:30:00'
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - fri
+  action:
+    service: notify.ios_chris_iphone
+    data:
+      message: "The front door has been unlocked!"
+      data:
+        push:
+          badge: 0
+
+- id: front-lights-off-sunrise
+  alias: Action - Poweroff lights after sunrise
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '00:10:00'
+  action:
+    service: homeassistant.turn_off
+    entity_id: 
+      - switch.front_house_lights
+
+- id: front-lights-on-sunset
+  alias: Action - Poweron lights after sunset
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '-00:10:00'
+  action:
+    service: homeassistant.turn_on
+    entity_id: 
+      - switch.front_house_lights
+
+# GARAGE AUTOMATIONS
+- id: garage-close-night
+  alias: Close garage after 10pm
+  trigger:
+    platform: state
+    entity_id: cover.garage_door
+    state: 'opened'
+    for:
+      minutes: 10
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.garage_close_night
+        state: 'on'
+      - condition: or
+        conditions:
+        - condition: time
+          after: '22:00:00'
+          before: '06:00:00'
+  action:
+    - service: cover.open_cover  
+      entity_id: cover.garage_door
+    - service: notify.ios_chris_iphone
+      data:
+        message: "The garage door has been closed becauuse it was opened late"
+        data:
+          push:
+            badge: 0
+    
+- id: garage-lights-on-door-open
+  alias: Garage lights on door open
+  trigger:
+    platform: state
+    entity_id: binary_sensor.garage_service_door
+    to: 'off'
+  action:
+     service: scene.turn_on
+     entity_id: scene.garage_on
+
+- id: garage_lights_motion_off
+  alias: Turn off garage lights 10 minutes after last movement
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.garage_sensor_motion
+      state: 'off'
+      for:
+        minutes: 10
+  condition:
+    condition: state
+    entity_id: input_boolean.garage_lights_motion
+    state: 'on'
+  action:
+    service: light.turn_off
+    entity_id: light.garage
+
+- id: garage_lights_motion_on
+  alias: Turn on garage lights when there is movement
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.garage_sensor_motion
+      state: 'on'
+  condition:
+    condition: state
+    entity_id: input_boolean.garage_lights_motion
+    state: 'on'
+  action:
+    service: scene.turn_on
+    entity_id: scene.garage_on
+
+- id: notify-garage-closing
+  alias: Notify when garage is closing
+  trigger:
+    platform: state
+    entity_id: cover.garage_door
+    to: 'closed'
+  condition:
+    condition: state
+    entity_id: input_boolean.notifications_garage
+    state: 'on'
+  action:
+    service: notify.ios_chris_iphone
+    data:
+      message: "The garage door is closing!"
+      data:
+        push:
+          badge: 0
+
+- id: notify-garage-motion
+  alias: Notify when motion in the garage
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.garage_sensor_motion
+      to: 'on'
+  condition: 
+    condition: state
+    entity_id: input_boolean.security_notifications
+    state: 'on'
+  action:
+    service: notify.ios_chris_iphone
+    data:
+      message: "There is motion in the garage!"
+      data:
+        push:
+          badge: 0
+
+- id: notify-garage-opening
+  alias: Notify when garage is opening
+  trigger:
+    platform: state
+    entity_id: cover.garage_door
+    to: 'open'
+  condition:
+    condition: state
+    entity_id: input_boolean.notifications_garage
+    state: 'on'
+  action:
+    service: notify.ios_chris_iphone
+    data:
+      message: "The garage door is opening!"
+      data:
+        push:
+          badge: 0"
+
+- id: garage-lights-on-garage-open
+  alias: Turn on garage lights when garage opens
+  trigger:
+    platform: state
+    entity_id: cover.garage_door
+    to: 'open'
+  action:
+    service: scene.turn_on
+    entity_id: scene.garage_on
+  
+- id: garage-lights-on-garage-close
+  alias: Turn off garage lights when garage closes
+  trigger:
+    platform: state
+    entity_id: cover.garage_door
+    to: 'closed'
+  action:
+    service: light.turn_off
+    entity_id: light.garage
+
+# LIGHTS AUTOMATIONS
+- id: lights-on-evening
+  alias: Action - TV Lights Before Sunset
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '-00:10:00'
+  condition: 
+    condition: state
+    entity_id: input_boolean.sunset_lights
+    state: 'on'
+  action:
+    service: scene.turn_on
+    entity_id: scene.tv_lights
+
+- id: bathroom-fan-timer
+  alias: Turn bathroom fan off after 15 minutes
+  trigger: 
+    platform: state
+    entity_id: switch.master_bath_switch
+    from: 'off'
+    to: 'on'
+    for:
+      minutes: 15
+  condition: 
+    condition: state
+    entity_id: input_boolean.fan_timer
+    state: 'on'
+  action:
+    service: switch.turn_off
+    entity_id: switch.master_bath_switch
+
+- id: house-lights-off-night
+  alias: Poweroff lights at night
+  trigger:
+    platform: time
+    after: 00:30:00
+  action:
+    service: homeassistant.turn_off
+    entity_id: 
+      - light.floor_lamps
+      - switch.hall_light
+      - switch.cabinet_lights
+      - switch.sink_light
+      - light.living_room
+      - light.kitchen
+      - light.color_lights
+      - group.basement_2
+      - group.garage
+
+# SECURITY AUTOMATIONS
+- id: notify-service-door-open
+  alias: Notify when service door is opened
+  trigger:
+    platform: state
+    entity_id: binary_sensor.garage_service_door
+    from: 'on'
+    to: 'off'
+  condition: 
+    condition: state
+    entity_id: input_boolean.security_notifications
+    state: 'on'
+  action:
+    service: notify.ios_chris_iphone
+    data:
+      message: "The garage service door has been opened"
+      data:
+        push:
+          badge: 0
+
+- id: notify-patio-door-open
+  alias: Notify when patio door is opened
+  trigger:
+    platform: state
+    entity_id: binary_sensor.patio_door
+    from: 'on'
+    to: 'off'
+  condition: 
+    condition: state
+    entity_id: input_boolean.security_notifications
+    state: 'on'
+  action:
+    service: notify.ios_chris_iphone
+    data:
+      message: "The patio door has been opened"
+      data:
+        push:
+          badge: 0
+
+- id: security-system-on
+  alias: Home secuirty automations on
+  trigger:
+    - platform: state
+      entity_id: input_boolean.security_notifications
+      from: 'off'
+      to: 'on'
+  action:
+    - service: lock.lock  
+      entity_id: lock.front_door_lock  
+    - service: notify.ios_chris_iphone
+      data:
+        message: "Your security system has been armed!"
+        data:
+          push:
+            badge: 0
+    - service: switch.turn_on
+      entity_id: switch.security_system
+
+- id: security-system-off
+  alias: Home security automations off
+  trigger:
+    - platform: state
+      entity_id: input_boolean.security_notifications
+      from: 'on'
+      to: 'off'
+  action:
+    - service: notify.ios_chris_iphone
+      data:
+        message: "Your security system has been disarmed!"
+        data:
+          push:
+            badge: 0
+    - service: switch.turn_off
+      entity_id: switch.security_system
+
+- id: home-security-auto-on-night
+  alias: Home security auto on night
+  trigger:
+    - platform: time
+      after: '23:45:00'
+  action:
+    - service: input_boolean.turn_on
+      data:  
+        entity_id: input_boolean.security_notifications 
+    - service: notify.ios_chris_iphone
+      data:
+        message: "Your security system has been armed!"
+        data:
+          push:
+            badge: 0
+  
+- id: home-security-auto-off-morning  
+  alias: Home security auto off morning
+  trigger:
+    - platform: time
+      after: '07:00:00'
+  action:
+    - service: input_boolean.turn_off
+      data:  
+        entity_id: input_boolean.security_notifications 
+    - service: notify.ios_chris_iphone
+      data:
+        message: "Your security system has been disarmed!"
+        data:
+          push:
+            badge: 0
+
+# BASEMENT AUTOMATIONS
+- id: basement_lights_on_motion
+  alias: Turn on basement lights when there is movement
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.basement_motion
+      state: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.basement_lights_motion
+        state: 'on'
+      - condition: state
+        entity_id: light.basement_dimmer
+        state: 'off'
+      - condition: state
+        entity_id: light.fireplace_dimmer
+        state: 'off'
+  action:
+    service: scene.turn_on
+    entity_id: scene.basement_night
+
+- id: basement_lights_motion_off
+  alias: Turn off basement lights no motion
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.basement_motion
+      state: 'off'
+      for:
+        minutes: 10
+  condition:
+    - condition: state
+      entity_id: input_boolean.basement_lights_motion
+      state: 'on'
+  action:
+    - service: light.turn_off
+      entity_id: 
+        - light.basement_dimmer
+        - light.fireplace_dimmer
+        - light.basement_lamp      

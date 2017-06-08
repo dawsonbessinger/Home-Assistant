@@ -1,0 +1,299 @@
+default_view:
+  name: DEFAULT
+  view: yes
+  icon: mdi:home
+  entities:
+    - device_tracker.chris_iphone
+    - device_tracker.salittlesiphone
+    - sensor.pws_temp_f
+    - sensor.nursery_temp
+    - sensor.ssl_certificate_expiry
+    - group.security
+    - group.scenes
+    - group.bedrooms
+    - group.thermostat
+    - group.kitchen
+    - group.living_room
+    - group.family_room
+    - group.dining_room
+    - group.basement
+    - group.garage
+light_view:
+  name: Lights
+  view: yes
+  icon: mdi:lightbulb
+  entities:
+    - group.living_room_2
+    - group.kitchen_2
+    - group.dining_room_2
+    - group.family_room
+    - group.basement
+    - group.bedrooms_2
+    - group.garage_2
+sensor_view:
+  name: Sensors
+  view: yes
+  icon: mdi:gauge
+  entities:
+    - group.temperature
+    - group.thermostat
+    - group.smoke_gas
+    - group.sensor_battery_levels
+    - group.motion_sensors
+    - sun.sun
+status_view:
+  name: Status
+  view: yes
+  icon: mdi:chip
+  entities:
+    - group.sensor_pi
+    - group.sabnzbd
+    - sensor.speedtest_ping
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+locks_view:
+  name: Locks and Doors
+  view: yes
+  icon: mdi:lock-open
+  entities:
+    - group.garage_door_locks
+    - group.input_booleans
+    - group.travel_times
+    - camera.garage_camera
+weather_view:
+  name: Weather
+  view: yes
+  icon: mdi:white-balance-sunny
+  entities:
+    - group.weather_cameras
+    - group.wunderground
+security:
+  name: Home Security
+  entities:
+    - input_boolean.security_notifications
+scenes:
+  name: Scenes
+  entities:
+    - scene.tv_lights
+    - scene.cooking
+    - scene.basement_night
+    - scene.night_lights
+thermostat:
+  name: Nest Thermostat
+  entities:
+    - climate.nest
+living_room:
+  name: Living Room
+  entities:
+    - light.living_room
+    - input_slider.brightness_living_room
+    - light.floor_lamps
+    - input_slider.brightness_floor_lamps
+    - light.table_lights
+    - input_slider.brightness_table_lights
+    - light.hue_lightstrip
+living_room_2:
+  name: Living Room
+  entities:
+    - switch.table_lights
+    - light.hue_lightstrip
+    - light.color_lights
+    - switch.hallway_light
+    - light.living_can_1
+    - light.living_can_2
+    - light.living_can_3
+    - light.living_can_4
+    - light.living_can_5
+    - light.living_can_6
+    - light.living_can_7
+    - light.floor_lamp_1
+    - light.floor_lamp_2
+kitchen:
+  name: Kitchen
+  entities:
+    - light.kitchen
+    - input_slider.brightness_kitchen
+    - switch.cabinet_lights
+    - switch.sink_light
+kitchen_2:
+  name: Kitchen
+  entities:
+    - light.kitchen_1
+    - light.kitchen_2
+    - light.kitchen_3
+    - light.kitchen_4
+    - light.kitchen_5
+    - light.kitchen_6
+    - switch.cabinet_lights
+    - switch.sink_light
+dining_room:
+  name: Dining Room
+  entities:
+    - light.dining_room_dimmer
+    - input_slider.brightness_dining_room
+    - light.family_room
+    - input_slider.brightness_family_room
+dining_room_2:
+  name: Dining Room
+  entities:
+    - light.family_room_1
+    - light.family_room_2
+    - ligth.dining_room_dimmer
+family_room:
+  name: Family Room
+  entities:
+    - switch.stairway_lights
+    - light.hue_bloom
+    - switch.front_house_lights 
+basement:
+  name: Basement
+  entities:
+    - light.fireplace_dimmer
+    - light.basement_dimmer
+    - light.basement_lamp
+    - input_slider.brightness_basement
+basement_2:
+  name: Basement Lights
+  entities:
+    - light.fireplace_dimmer
+    - light.basement_dimmer
+    - light.basement_lamp
+bedrooms:
+  name: Bedrooms
+  entities:
+    - light.bedroom
+    - input_slider.brightness_bedroom
+    - light.nursery_lamp
+    - input_slider.brightness_nursery_lamp
+    - switch.bedroom_fan
+bedrooms_2:
+  name: Bedrooms
+  entities:
+    - light.bedroom_1
+    - light.bedroom_2
+    - switch.master_bath_switch
+    - light.nursery_lamp
+garage:
+  name: Garage Lights
+  entities:
+    - light.garage
+    - input_slider.brightness_garage_lights
+garage_2:
+  name: Garage Lights
+  entities:
+    - light.garage_1
+    - light.garage_2
+    - light.garage_3
+temperature:
+  name: "Temperature & Humidity"
+  entities:
+    - sensor.basement_temp
+    - sensor.nursery_temp
+    - sensor.garage_temp
+    - sensor.nest_thermostat_temperature
+    - sensor.master_bedroom_temp
+    - sensor.master_bedroom_humidity
+    - sensor.utility_room_temp
+    - sensor.nest_thermostat_humidity
+    - sensor.kingsview_heights_temperature
+    - sensor.kingsview_heights_humidity
+    - sensor.kingsview_heights_pressure
+    - sensor.kingsview_heights_uvindex
+    - sensor.kingsview_heights_luminance
+smoke_gas:
+  name: "Smoke & CO"
+  entities:
+    - sensor.upstairs_nest_protect_co_status
+    - sensor.upstairs_nest_protect_smoke_status
+sensor_pi:
+  name: Raspberry Pi
+  entities:
+    - sensor.cpu_use
+    - sensor.disk_use_
+    - sensor.disk_use_varlog
+    - sensor.ram_use
+    - sensor.ram_free
+    - sensor.swap_use
+    - sensor.swap_free
+    - sensor.last_boot
+    - sensor.since_last_boot
+sensor_battery_levels:
+  name: Sensor Battery Levels
+  entities:
+    - sensor.upstairs_nest_protect_battery_health
+    - sensor.basement_sensor_battery
+    - sensor.nursery_sensor_battery
+    - sensor.garage_sensor_2_battery
+    - sensor.garage_sensor_battery
+    - sensor.master_bedroom_battery
+    - sensor.utility_room_battery
+    - sensor.front_door_lock_battery
+    - sensor.patio_door_sensor_battery
+    - sensor.service_door_sensor_battery
+    - sensor.kitchen_smoke_and_co2_battery
+wunderground:
+  name: Wunderground
+  entities:
+    - sensor.pws_weather
+    - sensor.pws_temp_f
+    - sensor.pws_feelslike_string
+    - sensor.pws_heat_index_string
+    - sensor.pws_relative_humidity
+    - sensor.pws_dewpoint_string
+    - sensor.pws_wind_string
+    - sensor.pws_precip_today_string
+    - sensor.pws_pressure_in
+    - sensor.pws_visibility_mi
+    - sensor.pws_uv
+    - sensor.pws_solarradiation
+    - sensor.pws_alerts
+    - weblink.forecast
+weather_cameras:
+  name: Bloomsky Camera
+  entities:
+    - camera.kingsview_heights
+sabnzbd:
+  name: SABNZBD
+  entities:
+    - sensor.sabnzbd_status
+    - sensor.sabnzbd_speed
+    - sensor.sabnzbd_disk
+    - sensor.sabnzbd_left
+    - sensor.sabnzbd_disk_free
+    - sensor.sabnzbd_queue
+motion_sensors:
+  name: Motion Sensors
+  entities:
+    - binary_sensor.basement_motion
+    - binary_sensor.nursery_motion
+    - binary_sensor.front_door_motion
+    - binary_sensor.jacks_crib_motion
+    - binary_sensor.lillys_crib_motion
+    - binary_sensor.garage_sensor_motion
+garage_door_locks:
+  name: Garage Door & Locks
+  entities:
+    - lock.front_door_lock
+    - cover.garage_door
+travel_times:
+  name: Travel Times
+  entities:
+    - sensor.chris_work_travel
+    - sensor.chris_home_travel
+    - sensor.chris_location_to_home
+input_booleans:
+  name: Automations
+  entities:
+    - input_boolean.notifications_garage
+    - input_boolean.notify_front_door_unlocked
+    - input_boolean.auto_lock_front_door
+    - input_boolean.sunset_lights
+    - input_boolean.security_notifications
+    - input_boolean.garage_close_night
+    - input_boolean.garage_lights_motion
+    - input_boolean.basement_lights_motion
+    - input_boolean.fan_timer
+zones:
+  name: Zones
+  entities:
+    - binary_sensor.floorplan

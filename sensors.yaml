@@ -1,0 +1,194 @@
+- platform: systemmonitor
+  resources:
+  - type: disk_use_percent
+    arg: /
+  - type: disk_use_percent
+    arg: /var/log
+  - type: memory_use_percent
+  - type: memory_use
+  - type: memory_free
+  - type: processor_use
+  - type: swap_use_percent
+  - type: swap_use
+  - type: swap_free
+  - type: last_boot
+  - type: since_last_boot
+  - type: network_in
+    arg: eth0
+  - type: network_out
+    arg: eth0
+  - type: packets_in
+    arg: eth0
+  - type: packets_out
+    arg: eth0
+  - type: ipv4_address
+    arg: eth0
+  - type: ipv6_address
+    arg: eth0
+  - type: network_in
+    arg: eth1
+  - type: network_out
+    arg: eth1
+  - type: packets_in
+    arg: eth1
+  - type: packets_out
+    arg: eth1
+  - type: ipv4_address
+    arg: eth1
+  - type: ipv6_address
+    arg: eth1
+- platform: mqtt
+  state_topic: "smartthings/Basement/temperature"
+  name: "Basement Temp"
+  unit_of_measurement: "°F"
+- platform: mqtt
+  state_topic: "smartthings/Basement/battery"
+  name: "Basement Sensor Battery"
+  unit_of_measurement: "%"
+- platform: mqtt
+  state_topic: "smartthings/Nursery Sensor/temperature"
+  name: "Nursery Temp"
+  unit_of_measurement: "°F"
+- platform: mqtt
+  state_topic: "smartthings/Nursery Sensor/battery"
+  name: "Nursery Sensor Battery"
+  unit_of_measurement: "%"
+- platform: mqtt
+  state_topic: "smartthings/Master Bedroom Sensor/temperature"
+  name: "Master Bedroom Temp"
+  unit_of_measurement: "°F"
+- platform: mqtt
+  state_topic: "smartthings/Master Bedroom Sensor/battery"
+  name: "Master Bedroom Battery"
+  unit_of_measurement: "%"
+- platform: mqtt
+  state_topic: "smartthings/Master Bedroom Sensor/humidity"
+  name: "Master Bedroom Humidity"
+  unit_of_measurement: "%"
+- platform: mqtt
+  state_topic: "smartthings/Water Leak Sensor/temperature"
+  name: "Utility Room Temp"
+  unit_of_measurement: "°F"
+- platform: mqtt
+  state_topic: "smartthings/Water Leak Sensor/battery"
+  name: "Utility Room Battery"
+  unit_of_measurement: "%"
+- platform: mqtt
+  state_topic: "smartthings/Garage Motion/temperature"
+  name: "Garage Temp"
+  unit_of_measurement: "°F"
+- platform: mqtt
+  state_topic: "smarttings/Garage Motion/battery"
+  name: "Garage Sensor 2 Battery"
+  unit_of_measurement: "%"
+- platform: mqtt
+  state_topic: "smartthings/Garage Motion 2/temperature"
+  name: "Garage Temp 2"
+  unit_of_measurement: "°F"
+- platform: mqtt
+  state_topic: "smarttings/Garage Motion 2/battery"
+  name: "Garage Sensor Battery"
+  unit_of_measurement: "%"
+- platform: mqtt
+  state_topic: "smarttings/Front Door Lock/battery"
+  name: "Front Door Lock Battery"
+  unit_of_measurement: "%"
+  value_template: '{{ value_json.batt }}'
+- platform: mqtt
+  state_topic: "smarttings/Patio Door Sensor/battery"
+  name: "Patio Door Sensor Battery"
+  unit_of_measurement: "%"
+- platform: mqtt
+  state_topic: "smarttings/Service Door Sensor/battery"
+  name: "Service Door Sensor Battery"
+  unit_of_measurement: "%"
+- platform: mqtt
+  state_topic: "smarttings/Kitchen Smoke and CO2/battery"
+  name: "Kitchen Smoke and CO2 Battery"
+  unit_of_measurement: "%"
+- platform: wunderground
+  api_key: !secret wunderground_api_key
+  monitored_conditions:
+    - alerts
+    - dewpoint_c
+    - dewpoint_f
+    - dewpoint_string
+    - feelslike_c
+    - feelslike_f
+    - feelslike_string
+    - heat_index_c
+    - heat_index_f
+    - heat_index_string
+    - elevation
+    - location
+    - observation_time
+    - precip_1hr_in
+    - precip_1hr_metric
+    - precip_1hr_string
+    - precip_today_in
+    - precip_today_metric
+    - precip_today_string
+    - pressure_in
+    - pressure_mb
+    - pressure_trend
+    - relative_humidity
+    - station_id
+    - solarradiation
+    - temperature_string
+    - temp_c
+    - temp_f
+    - UV
+    - visibility_km
+    - visibility_mi
+    - weather
+    - wind_degrees
+    - wind_dir
+    - wind_gust_kph
+    - wind_gust_mph
+    - wind_kph
+    - wind_mph
+    - wind_string
+- platform: sabnzbd
+  host: !secret sabnzbd_host
+  port: !secret sabnzbd_port
+  api_key: !secret sabnzbd_api_key
+  monitored_variables:
+    - 'current_status'
+    - 'speed'
+    - 'queue_size'
+    - 'queue_remaining'
+    - 'disk_size'
+    - 'disk_free'
+- platform: speedtest
+  minute:
+    - 1
+    - 31
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+    - 'date_time'
+    - 'time_date'
+    - 'time_utc'
+    - 'beat'
+- platform: google_travel_time
+  name: Chris Work Travel
+  api_key: !secret google_api_key
+  origin: Home
+  destination: Work
+- platform: google_travel_time
+  name: Chris Home Travel
+  api_key: !secret google_api_key
+  origin: Work
+  destination: Home
+- platform: google_travel_time
+  name: Chris Location To Home
+  api_key: !secret google_api_key
+  origin: device_tracker.chris_iphone
+  destination: Home
+- platform: cert_expiry
+  host: !secret cert_expiry_host

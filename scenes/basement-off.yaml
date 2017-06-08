@@ -1,0 +1,8 @@
+name: Basement Off
+entities:
+  light.basement_dimmer:
+    state: off
+  light.fireplace_dimmer:
+    state: off
+  light.basement_lamp:
+    state: off

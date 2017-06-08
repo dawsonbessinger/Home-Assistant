@@ -1,0 +1,11 @@
+name: Basement Night
+entities:
+  light.basement_dimmer:
+    state: on
+    brightness: 132
+  light.fireplace_dimmer:
+    state: on
+    brightness: 132
+  light.basement_lamp:
+    state: on
+    brightness: 132

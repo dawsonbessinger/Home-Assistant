@@ -1,0 +1,65 @@
+brightness_kitchen:
+  name: Brightness
+  initial: 50
+  min: 0
+  max: 255
+  step: 1
+brightness_living_room:
+  name: Brightness
+  initial: 50
+  min: 0
+  max: 255
+  step: 1
+brightness_table_lights:
+  name: Brightness
+  initial: 50
+  min: 0
+  max: 255
+  step: 1
+brightness_dining_room:
+  name: Brightness
+  initial: 50
+  min: 0
+  max: 255
+  step: 1
+brightness_floor_lamps:
+  name: Brightness
+  initial: 100
+  min: 0
+  max: 255
+  step: 1
+brightness_basement:
+  name: Brightness
+  initial: 50
+  min: 0
+  max: 255
+  step: 1
+brightness_bedroom:
+  name: Brightness
+  initial: 50
+  min: 0
+  max: 255
+  step: 1
+brightness_family_room:
+  name: Brightness
+  initial: 50
+  min: 0
+  max: 255
+  step: 1
+brightness_color_lights:
+  name: Brightness
+  initial: 50
+  min: 0
+  max: 255
+  step: 1
+brightness_nursery_lamp:
+  name: Brightness
+  initial: 130
+  min: 0
+  max: 255
+  step: 1
+brightness_garage_lights:
+  name: Brightness
+  initial: 255
+  min: 0
+  max: 255

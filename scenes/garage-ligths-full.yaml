@@ -1,0 +1,5 @@
+name: Garage On
+entities:
+  light.garage: 
+    state: on
+    brightness: 255

@@ -1,0 +1,36 @@
+notifications_garage:
+    name: Garage Notifications
+    initial: on
+    icon: mdi:message-text-outline
+notify_front_door_unlocked:
+    name: Notify when front door is unlocked
+    initial: on
+    icon: mdi:message-text-outline
+auto_lock_front_door:
+    name: Automatically lock front door
+    initial: on
+    icon: mdi:message-text-outline
+sunset_lights:
+    name: Turn TV lights on just before sunset
+    initial: off
+    icon: mdi:message-text-outline
+security_notifications:
+    name: Home security system
+    initial: off
+    icon: mdi:message-text-outline
+garage_close_night:
+    name: Close Garage After 10pm
+    initial: on
+    icon: mdi:message-text-outline
+garage_lights_motion:
+    name: Garage Lights Motion
+    initial: on
+    icon: mdi:message-text-outline
+basement_lights_motion:
+    name: Basement Lights Motion
+    initial: on
+    icon: mdi:message-text-outline
+fan_timer:
+    name: Turn bathroom fan off after 15 minutes
+    initial: on
+    icon: mdi:message-text-outline

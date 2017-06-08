@@ -1,0 +1,15 @@
+chris_iphone:
+  hide_if_away: false
+  mac: !secret chris_iphone_mac
+  name: Chris
+  picture: /local/chris.jpg
+  track: true
+  vendor: Apple, Inc.
+
+salittlesiphone:
+  hide_if_away: false
+  mac: !secret stacy_iphone_mac
+  name: Stacy
+  picture: /local/stacy.jpg
+  track: true
+  vendor: Apple, Inc.

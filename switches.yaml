@@ -1,0 +1,81 @@
+- platform: mqtt
+  name: "Sink Light"
+  state_topic: "smartthings/Sink Light/switch"
+  command_topic: "smartthings/Sink Light/switch"
+  brightness_state_topic: "smartthings/Sink Light/level"
+  brightness_command_topic: "smartthings/Sink Light/level"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true  
+- platform: mqtt
+  name: "Cabinet Lights"
+  state_topic: "smartthings/Cabinet Lights/switch"
+  command_topic: "smartthings/Cabinet Lights/switch"
+  brightness_state_topic: "smartthings/Cabinet Lights/level"
+  brightness_command_topic: "smartthings/Cabinet Lights/level"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+- platform: mqtt
+  name: "Stairway Lights"
+  state_topic: "smartthings/Stairway Lights/switch"
+  command_topic: "smartthings/Stairway Lights/switch"
+  brightness_state_topic: "smartthings/Stairway Lights/level"
+  brightness_command_topic: "smartthings/Stairway Lights/level"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+- platform: mqtt
+  name: "Front House Lights"
+  state_topic: "smartthings/Front House Lights/switch"
+  command_topic: "smartthings/Front House Lights/switch"
+  brightness_state_topic: "smartthings/Front House Lights/level"
+  brightness_command_topic: "smartthings/Front House Lights/level"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+- platform: mqtt
+  name: "Hallway Light"
+  state_topic: "smartthings/Hallway Light/switch"
+  command_topic: "smartthings/Hallway Light/switch"
+  brightness_state_topic: "smartthings/Hallway Light/level"
+  brightness_command_topic: "smartthings/Hallway Light/level"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+- platform: mqtt
+  name: "Master Bath Switch"
+  state_topic: "smartthings/Master Bath Switch/switch"
+  command_topic: "smartthings/Master Bath Switch/switch"
+  brightness_state_topic: "smartthings/Master Bath Switch/level"
+  brightness_command_topic: "smartthings/Master Bath Switch/level"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+- platform: mqtt
+  name: "Garage Door"
+  state_topic: "smartthings/Garage Door/switch"
+  command_topic: "smartthings/Garage Door/switch"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+  optimistic: true
+- platform: mqtt
+  name: "Security System"
+  state_topic: "smartthings/Security System/switch"
+  command_topic: "smartthings/Security System/switch"
+  brightness_state_topic: "smartthings/Security System/level"
+  brightness_command_topic: "smartthings/Security System/level"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+- platform: mqtt
+  name: "Bedroom Fan"
+  state_topic: "smartthings/Bedroom Fan/switch"
+  command_topic: "smartthings/Bedroom Fan/switch"
+  brightness_state_topic: "smartthings/Bedroom Fan/level"
+  brightness_command_topic: "smartthings/Bedroom Fan/level"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+  optimistic: false

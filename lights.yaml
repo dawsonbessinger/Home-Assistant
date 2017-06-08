@@ -1,0 +1,42 @@
+- platform: hue
+  host: 192.168.1.35
+- platform: mqtt
+  name: "Fireplace Dimmer"
+  state_topic: "smartthings/Fireplace Dimmer/switch"
+  command_topic: "smartthings/Fireplace Dimmer/switch"
+  brightness_state_topic: "smartthings/Fireplace Dimmer/level"
+  brightness_command_topic: "smartthings/Fireplace Dimmer/level"
+  brightness_scale: 100
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+- platform: mqtt
+  name: "Basement Dimmer"
+  state_topic: "smartthings/Dimmer Switch/switch"
+  command_topic: "smartthings/Dimmer Switch/switch"
+  brightness_state_topic: "smartthings/Dimmer Switch/level"
+  brightness_command_topic: "smartthings/Dimmer Switch/level"
+  brightness_scale: 100
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+- platform: mqtt
+  name: "Dining Room Dimmer"
+  state_topic: "smartthings/Dining Room Dimmer/switch"
+  command_topic: "smartthings/Dining Room Dimmer/switch"
+  brightness_state_topic: "smartthings/Dining Room Dimmer/level"
+  brightness_command_topic: "smartthings/Dining Room Dimmer/level"
+  brightness_scale: 100
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+- platform: mqtt
+  name: "Table Lights"
+  state_topic: "smartthings/Table Lights/switch"
+  command_topic: "smartthings/Table Lights/switch"
+  brightness_state_topic: "smartthings/Table Lights/level"
+  brightness_command_topic: "smartthings/Table Lights/level"
+  brightness_scale: 100
+  payload_on: "on"
+  payload_off: "off"
+  retain: true

@@ -1,0 +1,6 @@
+name: Cooking
+entities:
+  light.kitchen: 
+    state: on
+    brightness: 200
+    color_temp: 400
