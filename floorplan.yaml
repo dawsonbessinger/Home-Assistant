@@ -26,6 +26,8 @@
             - light.garage_1
             - light.garage_2
             - light.garage_3
+            - light.table_lights
+            - light.dining_room_dimmer
           states:
             - state: 'on'
               class: 'light-on'
@@ -38,10 +40,43 @@
             - switch.cabinet_lights
             - switch.hallway_light
             - switch.stairway_lights
-            - switch.table_lights
             - switch.front_house_lights
           states:
             - state: 'on'
               class: 'light-on'
             - state: 'off'
               class: 'light-off'
+
+        - name: Binary sensors
+          entities:
+            - binary_sensor.patio_door
+            - binary_sensor.garage_service_door
+          states:
+            - state: 'off'
+              class: 'info-background'
+            - state: 'on'
+              class: 'warning-background'
+          state_transitions:
+            - name: On to off
+              from_state: 'on'
+              to_state: 'off'
+              duration: 10
+  
+        - name: Locks
+          entities:
+            - lock.front_door_lock
+          states:
+            - state: 'unlocked'
+              class: 'info-background'
+            - state: 'locked'
+              class: 'warning-background'
+
+        - name: Covers
+          entities:
+            - cover.garage_door
+          states:
+            - state: 'open'
+              class: 'info-background'
+            - state: 'closed'
+              class: 'warning-background'
+
