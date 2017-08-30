@@ -5,8 +5,8 @@
   payload_off: "inactive"
   sensor_class: motion
 - platform: mqtt
-  state_topic: "smartthings/Nursery Sensor/motion"
-  name: "Nursery Motion"
+  state_topic: "smartthings/Porch Sensor/motion"
+  name: "Porch Motion"
   payload_on: "active"
   payload_off: "inactive"
   sensor_class: motion
@@ -67,3 +67,6 @@
 - platform: mqtt
   state_topic: "dummy/floorplan/sensor"
   name: "Floorplan"
+- platform: mqtt
+  state_topic: "dummy/remote/sensor"
+  name: "Remote"

@@ -1,0 +1,261 @@
+nursery_temp_below_68:
+    sequence:
+      - service: homeassistant.turn_off
+        entity_id: automation.notify_nursery_temp_low
+      - delay:
+          hours: 1
+      - service: homeassistant.turn_on
+        entity_id: automation.notify_nursery_temp_low
+
+# HARMONY HUB SCRIPTS
+watch_apple_tv:
+  sequence:
+  - service: remote.turn_on
+    entity_id: remote.harmony_hub
+    data:
+      activity: 24911420
+watch_roku:
+  sequence:
+  - service: remote.turn_on
+    entity_id: remote.harmony_hub
+    data:
+      activity: 25376051
+watch_fire_tv:
+  sequence:
+  - service: remote.turn_on
+    entity_id: remote.harmony_hub
+    data:
+      activity: 21034967
+power_off:
+  sequence:
+  - service: remote.turn_off
+    entity_id: remote.harmony_hub
+    data:
+      device:
+        39737131
+        39734080
+pause:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: pause
+      device: >
+        {% if is_state("sensor.living_room_remote", "Watch Roku") %}
+        43380331      
+        {% elif is_state("sensor.living_room_remote", "Watch Apple TV") %}
+        36785806         
+        {% elif is_state("sensor.living_room_remote", "Watch Fire TV") %}
+        37357731
+        {% else %}
+        {% endif %}
+play:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: play
+      device: >
+        {% if is_state("sensor.living_room_remote", "Watch Roku") %}
+        43380331      
+        {% elif is_state("sensor.living_room_remote", "Watch Apple TV") %}
+        36785806         
+        {% elif is_state("sensor.living_room_remote", "Watch Fire TV") %}
+        37357731
+        {% else %}
+        {% endif %}
+directionup:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: directionup
+      device: >
+        {% if is_state("sensor.living_room_remote", "Watch Roku") %}
+        43380331      
+        {% elif is_state("sensor.living_room_remote", "Watch Apple TV") %}
+        36785806         
+        {% elif is_state("sensor.living_room_remote", "Watch Fire TV") %}
+        37357731
+        {% else %}
+        {% endif %}
+directiondown:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: directiondown
+      device: >
+        {% if is_state("sensor.living_room_remote", "Watch Roku") %}
+        43380331      
+        {% elif is_state("sensor.living_room_remote", "Watch Apple TV") %}
+        36785806         
+        {% elif is_state("sensor.living_room_remote", "Watch Fire TV") %}
+        37357731
+        {% else %}
+        {% endif %}
+directionright:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: directionright
+      device: >
+        {% if is_state("sensor.living_room_remote", "Watch Roku") %}
+        43380331      
+        {% elif is_state("sensor.living_room_remote", "Watch Apple TV") %}
+        36785806         
+        {% elif is_state("sensor.living_room_remote", "Watch Fire TV") %}
+        37357731
+        {% else %}
+        {% endif %}
+directionleft:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: directionleft
+      device: >
+        {% if is_state("sensor.living_room_remote", "Watch Roku") %}
+        43380331      
+        {% elif is_state("sensor.living_room_remote", "Watch Apple TV") %}
+        36785806         
+        {% elif is_state("sensor.living_room_remote", "Watch Fire TV") %}
+        37357731
+        {% else %}
+        {% endif %}
+select:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: select
+      device: >
+        {% if is_state("sensor.living_room_remote", "Watch Roku") %}
+        43380331      
+        {% elif is_state("sensor.living_room_remote", "Watch Apple TV") %}
+        36785806         
+        {% elif is_state("sensor.living_room_remote", "Watch Fire TV") %}
+        37357731
+        {% else %}
+        {% endif %}
+fastforward:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: fastforward
+      device: >
+        {% if is_state("sensor.living_room_remote", "Watch Roku") %}
+        43380331      
+        {% elif is_state("sensor.living_room_remote", "Watch Apple TV") %}
+        36785806         
+        {% elif is_state("sensor.living_room_remote", "Watch Fire TV") %}
+        37357731
+        {% else %}
+        {% endif %}
+rewind:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: rewind
+      device: >
+        {% if is_state("sensor.living_room_remote", "Watch Roku") %}
+        43380331      
+        {% elif is_state("sensor.living_room_remote", "Watch Apple TV") %}
+        36785806         
+        {% elif is_state("sensor.living_room_remote", "Watch Fire TV") %}
+        37357731
+        {% else %}
+        {% endif %}
+back:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: back
+      device: >
+        {% if is_state("sensor.living_room_remote", "Watch Roku") %}
+        43380331      
+        {% elif is_state("sensor.living_room_remote", "Watch Apple TV") %}
+        36785806         
+        {% elif is_state("sensor.living_room_remote", "Watch Fire TV") %}
+        37357731
+        {% else %}
+        {% endif %}
+exit:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: exit
+      device: >
+        {% if is_state("sensor.living_room_remote", "Watch Roku") %}
+        43380331      
+        {% elif is_state("sensor.living_room_remote", "Watch Apple TV") %}
+        36785806         
+        {% elif is_state("sensor.living_room_remote", "Watch Fire TV") %}
+        37357731
+        {% else %}
+        {% endif %}
+home:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: home
+      device: >
+        {% if is_state("sensor.living_room_remote", "Watch Roku") %}
+        43380331      
+        {% elif is_state("sensor.living_room_remote", "Watch Apple TV") %}
+        36785806         
+        {% elif is_state("sensor.living_room_remote", "Watch Fire TV") %}
+        37357731
+        {% else %}
+        {% endif %}
+menu:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: menu
+      device: >
+        {% if is_state("sensor.living_room_remote", "Watch Roku") %}
+        43380331      
+        {% elif is_state("sensor.living_room_remote", "Watch Apple TV") %}
+        36785806         
+        {% elif is_state("sensor.living_room_remote", "Watch Fire TV") %}
+        37357731
+        {% else %}
+        {% endif %}
+volumeup:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: volumeup
+      device: 39734080
+volumedown:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: volumedown
+      device: 39734080
+sound_toggle:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: powertoggle
+      device: 39734080
+mute:
+  sequence:
+  - service: remote.send_command
+    data_template:
+      entity_id: remote.harmony_hub
+      command: mute
+      device: 39734080
+
+

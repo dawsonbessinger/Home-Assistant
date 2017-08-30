@@ -124,6 +124,17 @@
       entity_id: light.nursery_lamp
       brightness: '{{ states.input_slider.brightness_nursery_lamp.state | int }}'
 
+- id: brightness-lily-nursery-lamp
+  alias: Brightness Lily Nursery Lamp
+  trigger:
+    platform: state
+    entity_id: input_slider.brightness_lily_nursery_lamp
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id: light.lily_nursery
+      brightness: '{{ states.input_slider.brightness_lily_nursery_lamp.state | int }}'
+
 - id: brightness-table-lights
   alias: Brightness Table Lights
   trigger:
@@ -135,6 +146,18 @@
       entity_id:
         - switch.table_lights
       brightness: '{{ states.input_slider.brightness_table_lights.state | int }}'
+
+- id: brightness-porch-lights
+  alias: Brightness Porch Lights
+  trigger:
+    platform: state
+    entity_id: input_slider.brightness_porch_lights
+  action:
+    service: switch.turn_on
+    data_template:
+      entity_id:
+        - switch.porch_lights
+      brightness: '{{ states.input_slider.brightness_porch_lights.state | int }}'
 
 # FRONT DOOR AND FRONT LIGHTS AUTOMATIONS
 - id: front-door-auto-lock
@@ -578,4 +601,19 @@
       entity_id: 
         - light.basement_dimmer
         - light.fireplace_dimmer
-        - light.basement_lamp      
+        - light.basement_lamp
+# Remote Automations
+#- id: pause_lr_tv
+#  alias: pause the living room tv
+#  trigger:
+#    - platform: state
+#      entity_id: binary_sensor.pause
+#      from: 'off'
+#      to: 'on'
+#  action:
+#    - service: script.turn_on
+#      entity_id: script.pause
+#    - service: input_boolean.turn_off
+#      data:  
+#        entity_id: input_boolean.pause
+    

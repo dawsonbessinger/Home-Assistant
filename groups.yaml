@@ -3,7 +3,7 @@ default_view:
   view: yes
   icon: mdi:home
   entities:
-    - device_tracker.chris_iphone
+    - device_tracker.christophers_iphone
     - device_tracker.salittlesiphone
     - sensor.pws_temp_f
     - sensor.nursery_temp
@@ -46,6 +46,7 @@ status_view:
   view: yes
   icon: mdi:chip
   entities:
+    - group.television
     - group.sensor_pi
     - group.sabnzbd
     - sensor.speedtest_ping
@@ -67,6 +68,12 @@ weather_view:
   entities:
     - group.weather_cameras
     - group.wunderground
+floorplans_view:
+  name: Floor Plan
+  view: yes
+  icon: mdi:home-variant
+  entities:
+    - group.floorplans
 security:
   name: Home Security
   entities:
@@ -92,10 +99,11 @@ living_room:
     - light.table_lights
     - input_slider.brightness_table_lights
     - light.hue_lightstrip
+    - switch.porch_lights
+    - input_slider.brightness_porch_lights
 living_room_2:
   name: Living Room
   entities:
-    - switch.table_lights
     - light.hue_lightstrip
     - light.color_lights
     - switch.hallway_light
@@ -108,6 +116,7 @@ living_room_2:
     - light.living_can_7
     - light.floor_lamp_1
     - light.floor_lamp_2
+    - switch.porch_lights
 kitchen:
   name: Kitchen
   entities:
@@ -165,6 +174,8 @@ bedrooms:
     - input_slider.brightness_bedroom
     - light.nursery_lamp
     - input_slider.brightness_nursery_lamp
+    - light.lily_nursery
+    - input_slider.brightness_lily_nursery_lamp
     - switch.bedroom_fan
 bedrooms_2:
   name: Bedrooms
@@ -173,6 +184,8 @@ bedrooms_2:
     - light.bedroom_2
     - switch.master_bath_switch
     - light.nursery_lamp
+    - light.lily_nursery
+    - switch.bedroom_fan
 garage:
   name: Garage Lights
   entities:
@@ -191,7 +204,7 @@ temperature:
     - sensor.nursery_temp
     - sensor.garage_temp
     - sensor.nest_thermostat_temperature
-    - sensor.master_bedroom_temp
+    - sensor.porch_temp
     - sensor.master_bedroom_humidity
     - sensor.utility_room_temp
     - sensor.nest_thermostat_humidity
@@ -205,6 +218,17 @@ smoke_gas:
   entities:
     - sensor.upstairs_nest_protect_co_status
     - sensor.upstairs_nest_protect_smoke_status
+presence:
+  name: Presence
+  entities:
+    - device_tracker.pi_little
+    - device_tracker.salittlesiphone
+#time_date:
+#  name: Time & Date
+#  entities:
+#    - sensor.date
+#    - sensor.time
+#    - sensor.time_utc
 sensor_pi:
   name: Raspberry Pi
   entities:
@@ -217,6 +241,10 @@ sensor_pi:
     - sensor.swap_free
     - sensor.last_boot
     - sensor.since_last_boot
+#haveibeenpwned:
+#  name: haveibeenpwned
+#  entities:
+#    - sensor.breaches_somethingexamplecom
 sensor_battery_levels:
   name: Sensor Battery Levels
   entities:
@@ -225,7 +253,7 @@ sensor_battery_levels:
     - sensor.nursery_sensor_battery
     - sensor.garage_sensor_2_battery
     - sensor.garage_sensor_battery
-    - sensor.master_bedroom_battery
+    - sensor.porch_battery
     - sensor.utility_room_battery
     - sensor.front_door_lock_battery
     - sensor.patio_door_sensor_battery
@@ -265,7 +293,7 @@ motion_sensors:
   name: Motion Sensors
   entities:
     - binary_sensor.basement_motion
-    - binary_sensor.nursery_motion
+    - binary_sensor.porch_motion
     - binary_sensor.front_door_motion
     - binary_sensor.jacks_crib_motion
     - binary_sensor.lillys_crib_motion
@@ -293,7 +321,12 @@ input_booleans:
     - input_boolean.garage_lights_motion
     - input_boolean.basement_lights_motion
     - input_boolean.fan_timer
-zones:
-  name: Zones
+television:
+  name: TV
   entities:
-    - binary_sensor.floorplan
+    - sensor.living_room_remote
+    - sensor.basement_remote
+floorplans:
+    name: Floorplans
+    entities:
+      - binary_sensor.floorplan

@@ -46,6 +46,14 @@
   name: "Basement Sensor Battery"
   unit_of_measurement: "%"
 - platform: mqtt
+  state_topic: "smartthings/Porch Sensor/temperature"
+  name: "Porch Temp"
+  unit_of_measurement: "°F"
+- platform: mqtt
+  state_topic: "smartthings/Porch Sensor/battery"
+  name: "Porch Battery"
+  unit_of_measurement: "%"
+- platform: mqtt
   state_topic: "smartthings/Nursery Sensor/temperature"
   name: "Nursery Temp"
   unit_of_measurement: "°F"
@@ -54,16 +62,8 @@
   name: "Nursery Sensor Battery"
   unit_of_measurement: "%"
 - platform: mqtt
-  state_topic: "smartthings/Master Bedroom Sensor/temperature"
-  name: "Master Bedroom Temp"
-  unit_of_measurement: "°F"
-- platform: mqtt
-  state_topic: "smartthings/Master Bedroom Sensor/battery"
-  name: "Master Bedroom Battery"
-  unit_of_measurement: "%"
-- platform: mqtt
-  state_topic: "smartthings/Master Bedroom Sensor/humidity"
-  name: "Master Bedroom Humidity"
+  state_topic: "smartthings/Nursery Sensor/humidity"
+  name: "Nursery Humidity"
   unit_of_measurement: "%"
 - platform: mqtt
   state_topic: "smartthings/Water Leak Sensor/temperature"
@@ -192,3 +192,11 @@
   destination: Home
 - platform: cert_expiry
   host: !secret cert_expiry_host
+- platform: template
+  sensors:
+    living_room_remote:
+      value_template: '{{ states.remote.harmony_living_room.attributes.current_activity }}'
+      friendly_name: 'Living Room Remote'
+    basement_remote:
+      value_template: '{{ states.remote.harmony_basement.attributes.current_activity }}'
+      friendly_name: 'Basement Remote'

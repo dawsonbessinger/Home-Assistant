@@ -79,3 +79,13 @@
   payload_off: "off"
   retain: true
   optimistic: false
+- platform: mqtt
+  name: "Porch Lights"
+  state_topic: "smartthings/Porch Lights/switch"
+  command_topic: "smartthings/Porch Lights/switch"
+  brightness_state_topic: "smartthings/Porch Lights/level"
+  brightness_command_topic: "smartthings/Porch Lights/level"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+  optimistic: false

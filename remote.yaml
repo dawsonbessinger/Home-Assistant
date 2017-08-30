@@ -1,0 +1,42 @@
+      name: Remote
+      image: /local/custom_ui/floorplan/remote.svg
+      stylesheet: /local/custom_ui/floorplan/floorplan.css
+
+      groups:
+
+        - name: Scripts
+          entities:
+            - script.pause
+            - script.play
+            - script.volumeup
+            - script.volumedown
+            - script.watch_roku
+            - script.watch_fire_tv
+            - script.watch_apple_tv
+            - script.directionup
+            - script.directiondown
+            - script.directionleft
+            - script.directionright
+            - script.back
+            - script.exit
+            - script.fastforward
+            - script.rewind
+            - script.sound_toggle
+            - script.menu
+            - script.home
+            - script.mute
+            - script.power_off
+            - script.select
+          states:
+            - state: 'on'
+              class: 'light-on'
+            - state: 'off'
+              class: 'light-off'
+          action:
+            service: toggle 
+
+        - name: Remote Status
+          entities:
+            - sensor.living_room_remote
+          text_template: '${entity.state ? entity.state : "unknown"}'
+        

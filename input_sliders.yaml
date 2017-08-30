@@ -58,8 +58,20 @@ brightness_nursery_lamp:
   min: 0
   max: 255
   step: 1
+brightness_lily_nursery_lamp:
+  name: Brightness
+  initial: 130
+  min: 0
+  max: 255
+  step: 1
 brightness_garage_lights:
   name: Brightness
   initial: 255
   min: 0
   max: 255
+brightness_porch_lights:
+  name: Brightness
+  initial: 50
+  min: 0
+  max: 255
+  step: 1

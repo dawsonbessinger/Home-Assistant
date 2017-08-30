@@ -2,6 +2,11 @@
       image: /local/custom_ui/floorplan/floorplan.svg
       stylesheet: /local/custom_ui/floorplan/floorplan.css
 
+
+      warnings:
+      pan_zoom:
+      date_format: DD-MMM-YYYY
+
       groups:
 
         - name: lights
@@ -79,4 +84,20 @@
               class: 'info-background'
             - state: 'closed'
               class: 'warning-background'
+
+        - name: Sensors
+          entities:
+            - sensor.nest_thermostat_temperature
+            - sensor.pws_temp_f
+          text_template: '${entity.state ? entity.state : "unknown"}'
+
+        - name: Switches
+          entities:
+            - switch.security_system
+          states:
+            - state: 'unlocked'
+              class: 'info-background'
+            - state: 'locked'
+              class: 'warning-background'
+          text_template: '${entity.state ? entity.state : "unknown"}'
 

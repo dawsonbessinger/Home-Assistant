@@ -1,4 +1,4 @@
-chris_iphone:
+christophers_iphone:
   hide_if_away: false
   mac: !secret chris_iphone_mac
   name: Chris

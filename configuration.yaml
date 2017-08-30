@@ -112,7 +112,23 @@ cover:
 
 binary_sensor: !include binary_sensors.yaml  
 
-panel_custom: !include panel_custom.yaml
+panel_custom:
+  - name: floorplan
+    sidebar_title: Floorplan
+    sidebar_icon: mdi:home
+    url_path: floorplan
+    config: !include floorplan.yaml
+  - name: remote
+    sidebar_title: Remote
+    sidebar_icon: mdi:remote
+    url_path: remote
+    config: !include remote.yaml
+
+panel_iframe:
+  mdiindex:
+    title: MDI Icon Index
+    icon: mdi:vector-square
+    url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
      
 switch: !include switches.yaml
 
@@ -127,6 +143,14 @@ camera:
     username: !secret camera_garage_username
     password: !secret camera_garage_password
     authentication: basic
+
+remote: 
+  - platform: harmony
+    name: Harmony Basement
+    host: 192.168.1.33
+  - platform: harmony
+    name: Harmony Living Room
+    host: 192.168.1.13
 
 bloomsky:
   api_key: !secret bloomsky_api_key

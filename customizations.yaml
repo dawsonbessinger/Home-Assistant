@@ -19,7 +19,7 @@ sensor.upstairs_nest_protect_smoke_status:
   entity_picture: /local/protect.jpg
 sensor.basement_sensor_battery:
   icon: mdi:battery-charging
-sensor.nursery_sensor_battery:
+sensor.porch_battery:
   icon: mdi:battery-charging
 sensor.garage_sensor_2_battery:
   icon: mdi:battery-charging
@@ -31,7 +31,7 @@ sensor.patio_door_sensor_battery:
   icon: mdi:battery-charging
 sensor.kitchen_smoke_and_co2_battery:
   icon: mdi:battery-charging
-sensor.master_bedroom_battery:
+sensor.nursery_battery:
   icon: mdi:battery-charging
 sensor.utility_room_battery:
   icon: mdi:battery-charging
@@ -41,7 +41,7 @@ sensor.upstairs_nest_protect_battery_health:
   icon: mdi:battery-charging
 sensor.kingsview_heights_humidity:
   icon: mdi:water-percent
-sensor.master_bedroom_humidity:
+sensor.nursery_humidity:
   icon: mdi:water-percent
 sensor.nest_thermostat_humidity:
   icon: mdi:water-percent
@@ -100,3 +100,12 @@ weblink.forecast:
 binary_sensor.floorplan:
   custom_ui_state_card: floorplan
   config: !include floorplan.yaml
+binary_sensor.remote:
+  custom_ui_state_card: remote
+  config: !include remote.yaml
+input_boolean.security_notifications:
+  icon: mdi:security-home
+light.nursery_lamp:
+  friendly_name: Jacks Lamp
+light.lily_nursery:
+  friendly_name: Lilys Lamp
