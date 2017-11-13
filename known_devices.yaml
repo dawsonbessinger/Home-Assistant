@@ -2,11 +2,11 @@ christophers_iphone:
   hide_if_away: false
   mac: !secret chris_iphone_mac
   name: Chris
-  picture: /local/chris.jpg
+  picture: /local/chris2.jpg
   track: true
   vendor: Apple, Inc.
 
-salittlesiphone:
+salittles_iphone:
   hide_if_away: false
   mac: !secret stacy_iphone_mac
   name: Stacy

@@ -4,6 +4,7 @@ climate.nest:
 cover.garage_door:
   friendly_name: Garage Door Cover
   entity_picture: /local/garage.jpg
+  homebridge_cover_type: garage_door
 switch.garage_door:
   friendly_name: Garage Door
   entity_picture: /local/garage.jpg
@@ -109,3 +110,7 @@ light.nursery_lamp:
   friendly_name: Jacks Lamp
 light.lily_nursery:
   friendly_name: Lilys Lamp
+binary_sensor.jack_and_lily:
+  entity_picture: /local/jack_and_lily.jpg
+switch.jack_and_lily:
+  entity_picture: /local/jack_and_lily.jpg

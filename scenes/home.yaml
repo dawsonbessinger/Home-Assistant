@@ -1,0 +1,38 @@
+name: Home
+entities:
+  switch.hallway_light:
+    state: on
+  switch.cabinet_lights:
+    state: on
+  switch.sink_light:
+    state: off
+  light.living_room:
+    state: off
+  light.kitchen:
+    state: on
+    brightness: 125
+  light.color_lights:
+    state: off
+  group.basement_2:
+    state: off
+  switch.stairway_lights:
+    state: on
+  light.family_room:
+    state: on
+    brightness: 125
+  light.floor_lamp:
+    state: on
+    brightness: 255
+  light.bedroom:
+    state: on
+    brightness: 125
+  light.jack_nursery:
+    state: off
+  light.lily_nursery:
+    state: off
+  light.dining_room_dimmer:
+    state: off
+  light.table_lights:
+    state: off
+  switch.porch_lights:
+    state: off

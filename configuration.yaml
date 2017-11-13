@@ -2,8 +2,8 @@ homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
   # Location required to calculate the time the sun rises and sets
-  latitude: !secret sun_latitude
-  longitude: !secret sun_longitude
+  latitude: 45.0320619
+  longitude: -93.46879819999998
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 301
   # metric for Metric, imperial for Imperial
@@ -18,6 +18,8 @@ homeassistant:
 
 # Enables the frontend
 frontend:
+  extra_html_url:
+    - /local/custom_ui/state-card-floorplan.html
 
 zone:
   name: Home
@@ -86,11 +88,18 @@ notify:
     api_key: !secret pushover_api_key
     user_key: !secret pushover_user_key
 
-logger: !include loggers.yaml
+logger:
+  default: warn
+  logs:
+    homeassistant.components.updater: debug
+    homeassistant.components.automation: info
+    homeassistant.components.media_player: critical
 
 recorder:
   purge_days: 2
-  
+
+#datadog:
+ 
 # Components  
 nest:
   client_id: !secret nest_client_id
@@ -112,23 +121,19 @@ cover:
 
 binary_sensor: !include binary_sensors.yaml  
 
-panel_custom:
-  - name: floorplan
-    sidebar_title: Floorplan
-    sidebar_icon: mdi:home
-    url_path: floorplan
-    config: !include floorplan.yaml
-  - name: remote
-    sidebar_title: Remote
-    sidebar_icon: mdi:remote
-    url_path: remote
-    config: !include remote.yaml
+panel_custom: !include panel_custom.yaml
 
 panel_iframe:
   mdiindex:
     title: MDI Icon Index
     icon: mdi:vector-square
     url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
+  devices:
+    title: 'Devices'
+    icon: mdi:tune
+    url: https://graph.api.smartthings.com/api/token/484f81ab-d2f0-46a5-ac20-5b162826d93c/smartapps/installations/a8f651f9-0616-4320-8285-fe8a7068650c/dashboard/batteries
+    
+input_select: !include input_select.yaml
      
 switch: !include switches.yaml
 
@@ -173,3 +178,6 @@ ifttt:
 
 # Controls
 input_slider: !include input_sliders.yaml
+
+
+  

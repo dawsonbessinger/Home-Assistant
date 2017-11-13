@@ -6,10 +6,11 @@ default_view:
     - device_tracker.christophers_iphone
     - device_tracker.salittlesiphone
     - sensor.pws_temp_f
+    - sensor.porch_temp
     - sensor.nursery_temp
     - sensor.ssl_certificate_expiry
-    - group.security
-    - group.scenes
+    - sensor.heater_power_usage
+    - group.home
     - group.bedrooms
     - group.thermostat
     - group.kitchen
@@ -38,7 +39,7 @@ sensor_view:
     - group.temperature
     - group.thermostat
     - group.smoke_gas
-    - group.sensor_battery_levels
+#    - group.sensor_battery_levels
     - group.motion_sensors
     - sun.sun
 status_view:
@@ -47,6 +48,7 @@ status_view:
   icon: mdi:chip
   entities:
     - group.television
+    - group.logger
     - group.sensor_pi
     - group.sabnzbd
     - sensor.speedtest_ping
@@ -58,7 +60,7 @@ locks_view:
   icon: mdi:lock-open
   entities:
     - group.garage_door_locks
-    - group.input_booleans
+    - group.presence
     - group.travel_times
     - camera.garage_camera
 weather_view:
@@ -68,19 +70,25 @@ weather_view:
   entities:
     - group.weather_cameras
     - group.wunderground
-floorplans_view:
-  name: Floor Plan
+scenes_view:
+  name: Scenes
   view: yes
-  icon: mdi:home-variant
+  icon: mdi:power
   entities:
-    - group.floorplans
-security:
-  name: Home Security
+    - group.scenes
+    - group.input_booleans
+home:
+  name: Home
   entities:
     - input_boolean.security_notifications
+    - input_boolean.space_heater
+    - input_boolean.occupancy
+    - input_boolean.weekday_energy_saver
+    - scene.night_energy_saver
 scenes:
   name: Scenes
   entities:
+    - scene.night_energy_saver
     - scene.tv_lights
     - scene.cooking
     - scene.basement_night
@@ -218,11 +226,6 @@ smoke_gas:
   entities:
     - sensor.upstairs_nest_protect_co_status
     - sensor.upstairs_nest_protect_smoke_status
-presence:
-  name: Presence
-  entities:
-    - device_tracker.pi_little
-    - device_tracker.salittlesiphone
 #time_date:
 #  name: Time & Date
 #  entities:
@@ -245,20 +248,22 @@ sensor_pi:
 #  name: haveibeenpwned
 #  entities:
 #    - sensor.breaches_somethingexamplecom
-sensor_battery_levels:
-  name: Sensor Battery Levels
-  entities:
-    - sensor.upstairs_nest_protect_battery_health
-    - sensor.basement_sensor_battery
-    - sensor.nursery_sensor_battery
-    - sensor.garage_sensor_2_battery
-    - sensor.garage_sensor_battery
-    - sensor.porch_battery
-    - sensor.utility_room_battery
-    - sensor.front_door_lock_battery
-    - sensor.patio_door_sensor_battery
-    - sensor.service_door_sensor_battery
-    - sensor.kitchen_smoke_and_co2_battery
+#sensor_battery_levels:
+#  name: Sensor Battery Levels
+#  entities:
+#    - sensor.upstairs_nest_protect_battery_health
+#    - sensor.basement_sensor_battery
+#    - sensor.nursery_sensor_battery
+#    - sensor.garage_sensor_2_battery
+#    - sensor.garage_sensor_battery
+#    - sensor.porch_battery
+#    - sensor.utility_room_battery
+#    - sensor.front_door_lock_battery
+#    - sensor.patio_door_sensor_battery
+#    - sensor.service_door_sensor_battery
+#    - sensor.kitchen_smoke_and_co2_battery
+#    - sensor.pantry_battery
+#    - sensor.arrival_sensor_battery
 wunderground:
   name: Wunderground
   entities:
@@ -303,6 +308,12 @@ garage_door_locks:
   entities:
     - lock.front_door_lock
     - cover.garage_door
+presence:
+    name: Presence Sensors
+    entities:
+      - device_tracker.christophers_iphone
+      - device_tracker.salittles_iphone
+      - switch.jack_and_lily
 travel_times:
   name: Travel Times
   entities:
@@ -327,6 +338,12 @@ television:
     - sensor.living_room_remote
     - sensor.basement_remote
 floorplans:
-    name: Floorplans
+  name: Floorplans
+  entities:
+    - binary_sensor.floorplan
+    - binary_sensor.remote
+logger:
+    name: Select Logger
     entities:
-      - binary_sensor.floorplan
+      - input_select.log_level
+

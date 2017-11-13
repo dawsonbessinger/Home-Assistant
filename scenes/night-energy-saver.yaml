@@ -1,0 +1,30 @@
+name: Night Energy Saver
+entities:
+  light.kitchen:
+    state: off
+  light.living_room:
+    state: off
+  light.floor_lamps:
+    state: on
+    brightness: 150
+    rgb_color: [244, 166, 55]
+  light.hue_lightstrip:
+    state: off
+  light.table_lights:
+    state: off
+  switch.sink_light:
+    state: off
+  switch.cabinet_lights:
+    state: off
+  switch.hallway_light:
+    state: off
+  light.dining_room_dimmer:
+    state: off
+  light.hue_bloom:
+    state: off
+  switch.stairway_lights:
+    state: off
+  light.family_room:
+    state: on
+    brightness: 100
+      

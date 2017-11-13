@@ -89,3 +89,13 @@
   payload_off: "off"
   retain: true
   optimistic: false
+- platform: mqtt
+  name: "Jack and Lily"
+  state_topic: "smartthings/Arrival Switch/switch"
+  command_topic: "smartthings/Arrival Switch/switch"
+  brightness_state_topic: "smartthings/Arrival Switch/level"
+  brightness_command_topic: "smartthings/Arrival Switch/level"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+  optimistic: false

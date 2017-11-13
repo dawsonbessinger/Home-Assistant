@@ -1,0 +1,38 @@
+      name: Second Floor
+      image: /local/custom_ui/floorplan/second_floor.svg
+      stylesheet: /local/custom_ui/floorplan/floorplan.css
+
+
+      warnings:
+      pan_zoom:
+      date_format: DD-MMM-YYYY
+
+      groups:
+
+        - name: lights
+          entities:
+            - light.bedroom_1
+            - light.bedroom_2
+            - light.lily_nursery
+            - light.jack_nursery
+          states:
+            - state: 'on'
+              class: 'light-on'
+            - state: 'off'
+              class: 'light-off'
+        
+        - name: switches
+          entities:
+            - switch.bedroom_fan
+            - switch.master_bath_switch
+            - switch.stairway_lights
+          states:
+            - state: 'on'
+              class: 'light-on'
+            - state: 'off'
+              class: 'light-off'
+
+
+  
+   
+

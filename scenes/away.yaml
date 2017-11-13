@@ -1,0 +1,35 @@
+name: Away
+entities:
+  switch.hallway_light:
+    state: off
+  switch.cabinet_lights:
+    state: off
+  switch.sink_light:
+    state: off
+  light.living_room:
+    state: off
+  light.kitchen:
+    state: off
+  light.color_lights:
+    state: off
+  group.basement_2:
+    state: off
+  switch.stairway_lights:
+    state: off
+  light.family_room:
+    state: off
+  light.floor_lamp:
+    state: on
+    brightness: 200
+  light.bedroom:
+    state: off
+  light.jack_nursery:
+    state: off
+  light.lily_nursery:
+    state: off
+  light.dining_room_dimmer:
+    state: off
+  light.table_lights:
+    state: off
+  switch.porch_lights:
+    state: off

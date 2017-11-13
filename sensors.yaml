@@ -103,9 +103,21 @@
   name: "Service Door Sensor Battery"
   unit_of_measurement: "%"
 - platform: mqtt
+  state_topic: "smarttings/Pantry Door/battery"
+  name: "Pantry Battery"
+  unit_of_measurement: "%"
+- platform: mqtt
+  state_topic: "smarttings/Arrival Sensor/battery"
+  name: "Arrival Sensor Battery"
+  unit_of_measurement: "%"
+- platform: mqtt
   state_topic: "smarttings/Kitchen Smoke and CO2/battery"
   name: "Kitchen Smoke and CO2 Battery"
   unit_of_measurement: "%"
+- platform: mqtt
+  state_topic: "smartthings/Heater Outlet/power"
+  name: "Heater Power Usage"
+  unit_of_measurement: "watts"
 - platform: wunderground
   api_key: !secret wunderground_api_key
   monitored_conditions:
@@ -148,17 +160,17 @@
     - wind_kph
     - wind_mph
     - wind_string
-- platform: sabnzbd
-  host: !secret sabnzbd_host
-  port: !secret sabnzbd_port
-  api_key: !secret sabnzbd_api_key
-  monitored_variables:
-    - 'current_status'
-    - 'speed'
-    - 'queue_size'
-    - 'queue_remaining'
-    - 'disk_size'
-    - 'disk_free'
+#- platform: sabnzbd
+#  host: !secret sabnzbd_host
+#  port: !secret sabnzbd_port
+#  api_key: !secret sabnzbd_api_key
+#  monitored_variables:
+#    - 'current_status'
+#    - 'speed'
+#    - 'queue_size'
+#    - 'queue_remaining'
+#    - 'disk_size'
+#    - 'disk_free'
 - platform: speedtest
   minute:
     - 1
@@ -188,7 +200,7 @@
 - platform: google_travel_time
   name: Chris Location To Home
   api_key: !secret google_api_key
-  origin: device_tracker.chris_iphone
+  origin: device_tracker.christophers_iphone
   destination: Home
 - platform: cert_expiry
   host: !secret cert_expiry_host

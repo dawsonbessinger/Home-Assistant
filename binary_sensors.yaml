@@ -65,8 +65,25 @@
   payload_off: "open"
   sensor_class: opening
 - platform: mqtt
+  state_topic: "smartthings/Pantry Door/contact"  
+  name: "Pantry Door"
+  payload_on: "closed"
+  payload_off: "open"
+  sensor_class: opening
+- platform: mqtt
+  name: "Jack and Lily"
+  state_topic: "smartthings/Arrival Sensor/presence"
+  payload_on: 'present'
+  payload_off: 'away'
+- platform: mqtt
   state_topic: "dummy/floorplan/sensor"
   name: "Floorplan"
+- platform: mqtt
+  state_topic: "dummy/second_floor/sensor"
+  name: "Second Floor"
+- platform: mqtt
+  state_topic: "dummy/basement/sensor"
+  name: "Basement"
 - platform: mqtt
   state_topic: "dummy/remote/sensor"
   name: "Remote"

@@ -1,4 +1,6 @@
+################################################################
 # BRIGHTNESS AUTOMATIONS
+################################################################
 - id: brightness-basement
   alias: Brightness Basement
   trigger:
@@ -159,13 +161,15 @@
         - switch.porch_lights
       brightness: '{{ states.input_slider.brightness_porch_lights.state | int }}'
 
+################################################################
 # FRONT DOOR AND FRONT LIGHTS AUTOMATIONS
+################################################################
 - id: front-door-auto-lock
   alias: lock front door after hours
   trigger:
     platform: state
     entity_id: lock.front_door_lock
-    state: 'unlocked'
+    to: 'unlocked'
     for:
       minutes: 30
   condition:
@@ -178,14 +182,6 @@
         conditions:
         - condition: time
           after: '23:00:00'
-          weekday:
-            - mon
-            - tue
-            - wed
-            - thu
-            - fri
-            - sat
-            - sun
         - condition: time
           after: '09:00:00'
           before: '17:30:00'
@@ -198,7 +194,7 @@
   action:
     - service: lock.lock  
       entity_id: lock.front_door_lock  
-    - service: notify.ios_chris_iphone
+    - service: notify.ios_christophers_iphone
       data:
         message: "Your front door has been locked due to time!"
         data:
@@ -210,7 +206,7 @@
   trigger:
     platform: state
     entity_id: lock.front_door_lock
-    state: 'unlocked'
+    to: 'unlocked'
   condition:
     condition: and
     conditions:
@@ -224,16 +220,10 @@
         - condition: time
           after: '09:00:00'
           before: '17:30:00'
-          weekday:
-            - mon
-            - tue
-            - wed
-            - thu
-            - fri
   action:
-    service: notify.ios_chris_iphone
+    service: notify.ios_christophers_iphone
     data:
-      message: "The front door has been unlocked!"
+      message: "The front door is unlocked and its late"
       data:
         push:
           badge: 0
@@ -260,13 +250,16 @@
     entity_id: 
       - switch.front_house_lights
 
+################################################################
 # GARAGE AUTOMATIONS
+################################################################
+
 - id: garage-close-night
   alias: Close garage after 10pm
   trigger:
     platform: state
     entity_id: cover.garage_door
-    state: 'opened'
+    to: 'opened'
     for:
       minutes: 10
   condition:
@@ -275,17 +268,15 @@
       - condition: state
         entity_id: input_boolean.garage_close_night
         state: 'on'
-      - condition: or
-        conditions:
-        - condition: time
-          after: '22:00:00'
-          before: '06:00:00'
+      - condition: time
+        after: '22:00:00'
+        before: '06:00:00'
   action:
     - service: cover.open_cover  
       entity_id: cover.garage_door
-    - service: notify.ios_chris_iphone
+    - service: notify.ios_christophers_iphone
       data:
-        message: "The garage door has been closed becauuse it was opened late"
+        message: "The garage door has been closed because it was open late"
         data:
           push:
             badge: 0
@@ -300,35 +291,25 @@
      service: scene.turn_on
      entity_id: scene.garage_on
 
-- id: garage_lights_motion_off
-  alias: Turn off garage lights 10 minutes after last movement
+- id: pantry_light_on_door_open
+  alias: Pantry light turns on when door opens
   trigger:
-    - platform: state
-      entity_id: binary_sensor.garage_sensor_motion
-      state: 'off'
-      for:
-        minutes: 10
-  condition:
-    condition: state
-    entity_id: input_boolean.garage_lights_motion
-    state: 'on'
+    platform: state
+    entity_id: binary_sensor.pantry_door
+    to: 'off'
   action:
-    service: light.turn_off
-    entity_id: light.garage
+     service: light.turn_on
+     entity_id: light.pantry_light
 
-- id: garage_lights_motion_on
-  alias: Turn on garage lights when there is movement
+- id: pantry_light_off_door_close
+  alias: Pantry light turns off when door closes
   trigger:
-    - platform: state
-      entity_id: binary_sensor.garage_sensor_motion
-      state: 'on'
-  condition:
-    condition: state
-    entity_id: input_boolean.garage_lights_motion
-    state: 'on'
+    platform: state
+    entity_id: binary_sensor.pantry_door
+    to: 'on'
   action:
-    service: scene.turn_on
-    entity_id: scene.garage_on
+     service: light.turn_off
+     entity_id: light.pantry_light
 
 - id: notify-garage-closing
   alias: Notify when garage is closing
@@ -341,27 +322,9 @@
     entity_id: input_boolean.notifications_garage
     state: 'on'
   action:
-    service: notify.ios_chris_iphone
+    service: notify.ios_christophers_iphone
     data:
       message: "The garage door is closing!"
-      data:
-        push:
-          badge: 0
-
-- id: notify-garage-motion
-  alias: Notify when motion in the garage
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.garage_sensor_motion
-      to: 'on'
-  condition: 
-    condition: state
-    entity_id: input_boolean.security_notifications
-    state: 'on'
-  action:
-    service: notify.ios_chris_iphone
-    data:
-      message: "There is motion in the garage!"
       data:
         push:
           badge: 0
@@ -377,7 +340,7 @@
     entity_id: input_boolean.notifications_garage
     state: 'on'
   action:
-    service: notify.ios_chris_iphone
+    service: notify.ios_christophers_iphone
     data:
       message: "The garage door is opening!"
       data:
@@ -394,7 +357,7 @@
     service: scene.turn_on
     entity_id: scene.garage_on
   
-- id: garage-lights-on-garage-close
+- id: garage-lights-off-garage-close
   alias: Turn off garage lights when garage closes
   trigger:
     platform: state
@@ -404,7 +367,26 @@
     service: light.turn_off
     entity_id: light.garage
 
+- id: garage-lights-timer
+  alias: Turn off garage lights timer
+  trigger:
+    platform: state
+    entity_id: binary_sensor.garage_service_door
+    from: 'off'
+    to: 'on'
+    for:
+      minutes: 20
+  condition:
+    condition: state
+    entity_id: light.garage
+    state: 'on'
+  action:
+    service: light.turn_off
+    entity_id: light.garage
+
+################################################################
 # LIGHTS AUTOMATIONS
+################################################################
 - id: lights-on-evening
   alias: Action - TV Lights Before Sunset
   trigger:
@@ -440,7 +422,7 @@
   alias: Poweroff lights at night
   trigger:
     platform: time
-    after: 00:30:00
+    at: 00:30:00
   action:
     service: homeassistant.turn_off
     entity_id: 
@@ -454,7 +436,9 @@
       - group.basement_2
       - group.garage
 
+################################################################
 # SECURITY AUTOMATIONS
+################################################################
 - id: notify-service-door-open
   alias: Notify when service door is opened
   trigger:
@@ -467,7 +451,7 @@
     entity_id: input_boolean.security_notifications
     state: 'on'
   action:
-    service: notify.ios_chris_iphone
+    service: notify.ios_christophers_iphone
     data:
       message: "The garage service door has been opened"
       data:
@@ -486,7 +470,7 @@
     entity_id: input_boolean.security_notifications
     state: 'on'
   action:
-    service: notify.ios_chris_iphone
+    service: notify.ios_christophers_iphone
     data:
       message: "The patio door has been opened"
       data:
@@ -503,7 +487,7 @@
   action:
     - service: lock.lock  
       entity_id: lock.front_door_lock  
-    - service: notify.ios_chris_iphone
+    - service: notify.ios_christophers_iphone
       data:
         message: "Your security system has been armed!"
         data:
@@ -520,7 +504,7 @@
       from: 'on'
       to: 'off'
   action:
-    - service: notify.ios_chris_iphone
+    - service: notify.ios_christophers_iphone
       data:
         message: "Your security system has been disarmed!"
         data:
@@ -533,12 +517,12 @@
   alias: Home security auto on night
   trigger:
     - platform: time
-      after: '23:45:00'
+      at: '23:45:00'
   action:
     - service: input_boolean.turn_on
       data:  
         entity_id: input_boolean.security_notifications 
-    - service: notify.ios_chris_iphone
+    - service: notify.ios_christophers_iphone
       data:
         message: "Your security system has been armed!"
         data:
@@ -549,12 +533,12 @@
   alias: Home security auto off morning
   trigger:
     - platform: time
-      after: '07:00:00'
+      at: '07:00:00'
   action:
     - service: input_boolean.turn_off
       data:  
         entity_id: input_boolean.security_notifications 
-    - service: notify.ios_chris_iphone
+    - service: notify.ios_christophers_iphone
       data:
         message: "Your security system has been disarmed!"
         data:
@@ -567,7 +551,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.basement_motion
-      state: 'on'
+      to: 'on'
   condition:
     condition: and
     conditions:
@@ -589,7 +573,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.basement_motion
-      state: 'off'
+      to: 'off'
       for:
         minutes: 10
   condition:
@@ -602,18 +586,320 @@
         - light.basement_dimmer
         - light.fireplace_dimmer
         - light.basement_lamp
-# Remote Automations
-#- id: pause_lr_tv
-#  alias: pause the living room tv
-#  trigger:
-#    - platform: state
-#      entity_id: binary_sensor.pause
-#      from: 'off'
-#      to: 'on'
-#  action:
-#    - service: script.turn_on
-#      entity_id: script.pause
-#    - service: input_boolean.turn_off
-#      data:  
-#        entity_id: input_boolean.pause
-    
+
+################################################################
+# PORCH AUTOMATIONS
+################################################################
+- id: space_heater_power_on
+  alias: Turn on the space heater
+  trigger:
+    - platform: state
+      entity_id: input_boolean.space_heater
+      to: 'on'
+  action:
+    service: remote.send_command
+    data_template:
+      command: PowerToggle
+      device: 47272908
+      entity_id: remote.harmony_hub_porch
+- id: space_heater_power_off
+  alias: Turn off the space heater
+  trigger:
+    - platform: state
+      entity_id: input_boolean.space_heater
+      to: 'off'
+  action:
+    service: remote.send_command
+    data_template:
+      command: PowerToggle
+      device: 47272908
+      entity_id: remote.harmony_hub_porch
+      
+- id: space_heater_auto_off_time
+  alias: Turn off the space heater after 12:30pm
+  trigger:
+    - platform: time
+      at: 00:30:00
+  condition:
+    - condition: state
+      entity_id: input_boolean.space_heater
+      state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.space_heater
+      
+- id: space_heater_off_porch_lights
+  alias: Turn off the space heater if porch lights are turned off
+  trigger:
+    - platform: state
+      entity_id: switch.porch_lights
+      from: 'on'
+      to: 'off'
+  condition:
+    - condition: state
+      entity_id: input_boolean.space_heater
+      state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.space_heater
+
+################################################################      
+# INPUT SELECT AUTOMATIONS
+################################################################
+- id: select_logger_level
+  alias: change the logger level
+  trigger:
+    - platform: state
+      entity_id: input_select.log_level
+  action:
+    service: logger.set_level
+    data_template:
+      homeassistant.components: "{{ trigger.to_state.state }}"
+
+################################################################
+#PRESENCE AUTOMATIONS
+################################################################
+
+- id: occupancy_input_boolean_away
+  alias: Input Boolean to Away
+  trigger:
+    platform: state
+    entity_id: device_tracker.christophers_iphone
+    from: 'home'
+    to: 'not_home'
+    for:
+      minutes: 5
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: switch.jack_and_lily
+        state: 'off'
+      - condition: state
+        entity_id: device_tracker.salittles_iphone
+        state: 'not_home'
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.occupancy 
+    - service: notify.ios_christophers_iphone
+      data:
+        message: "No one is home. Automations commencing."
+        data:
+          push:
+            badge: 0
+
+- id: occupancy_input_boolean_home
+  alias: Input Boolean to Home
+  trigger:
+    - platform: state
+      entity_id: device_tracker.christophers_iphone
+      to: 'home'
+    - platform: state
+      entity_id: device_tracker.salittles_iphone
+      to: 'home'
+    - platform: state
+      entity_id: switch.jack_and_lily
+      to: 'on'
+  condition:
+    condition: state
+    entity_id: input_boolean.occupancy
+    state: 'off'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.occupancy 
+    - service: notify.ios_christophers_iphone
+      data:
+        message: "Welcome home! Automations commencing."
+        data:
+          push:
+            badge: 0  
+          
+
+################################################################
+#ENERGY SAVING AUTOMATIONS
+################################################################
+- id: table_lights_timer
+  alias: Turn off table lights after 60 minutes
+  trigger:
+    - platform: state
+      entity_id: light.table_lights
+      to: 'on'
+      for:
+        minutes: 60
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.weekday_energy_saver
+        state: 'on'
+      - condition: sun
+        after: sunrise
+        after_offset: '1:00:00'
+      - condition: sun
+        before: sunset
+        before_offset: '-1:00:00'
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+  action: 
+    - service: light.turn_off
+      entity_id: light.table_lights  
+
+- id: cabinet_lights_timer
+  alias: Turn off cabinet lights after 60 minutes
+  trigger:
+    - platform: state
+      entity_id: switch.cabinet_lights
+      to: 'on'
+      for:
+        minutes: 60
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.weekday_energy_saver
+        state: 'on'
+      - condition: sun
+        after: sunrise
+        after_offset: '1:00:00'
+      - condition: sun
+        before: sunset
+        before_offset: '-1:00:00'
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+  action: 
+    - service: switch.turn_off
+      entity_id: switch.cabinet_lights
+
+- id: sink_light_timer
+  alias: Turn off sink light after 60 minutes
+  trigger:
+    - platform: state
+      entity_id: switch.sink_light
+      to: 'on'
+      for:
+        minutes: 60
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.weekday_energy_saver
+        state: 'on'
+      - condition: sun
+        after: sunrise
+        after_offset: '1:00:00'
+      - condition: sun
+        before: sunset
+        before_offset: '-1:00:00'
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+  action: 
+    - service: switch.turn_off
+      entity_id: switch.sink_light
+      
+- id: stairway_light_timer
+  alias: Turn off stairway light after 60 minutes
+  trigger:
+    - platform: state
+      entity_id: switch.stairway_light
+      to: 'on'
+      for:
+        minutes: 60
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.weekday_energy_saver
+        state: 'on'
+      - condition: sun
+        after: sunrise
+        after_offset: '1:00:00'
+      - condition: sun
+        before: sunset
+        before_offset: '-1:00:00'
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+  action: 
+    - service: switch.turn_off
+      entity_id: switch.stairway_light
+      
+- id: hallway_light_timer
+  alias: Turn off hallway light after 60 minutes
+  trigger:
+    - platform: state
+      entity_id: switch.hallway_light
+      to: 'on'
+      for:
+        minutes: 60
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.weekday_energy_saver
+        state: 'on'
+      - condition: sun
+        after: sunrise
+        after_offset: '1:00:00'
+      - condition: sun
+        before: sunset
+        before_offset: '-1:00:00'
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+  action: 
+    - service: switch.turn_off
+      entity_id: switch.hallway_light
+      
+- id: kitchen_lights_timer
+  alias: Turn off hallway light after 60 minutes
+  trigger:
+    - platform: state
+      entity_id: light.kitchen
+      to: 'on'
+      for:
+        minutes: 60
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.weekday_energy_saver
+        state: 'on'
+      - condition: sun
+        after: sunrise
+        after_offset: '1:00:00'
+      - condition: sun
+        before: sunset
+        before_offset: '-1:00:00'
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+  action: 
+    - service: light.turn_off
+      entity_id: light.kitchen

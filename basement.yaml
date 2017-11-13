@@ -1,0 +1,21 @@
+      name: Basement
+      image: /local/custom_ui/floorplan/basement.svg
+      stylesheet: /local/custom_ui/floorplan/floorplan.css
+
+
+      warnings:
+      pan_zoom:
+      date_format: DD-MMM-YYYY
+
+      groups:
+
+        - name: lights
+          entities:
+            - light.basement_lamp
+            - light.basement_dimmer
+            - light.fireplace_dimmer
+          states:
+            - state: 'on'
+              class: 'light-on'
+            - state: 'off'
+              class: 'light-off'

@@ -31,10 +31,22 @@ basement_lights_motion:
     initial: on
     icon: mdi:message-text-outline
 fan_timer:
-    name: Turn bathroom fan off after 15 minutes
+    name: Bathroom Fan Timer
     initial: on
     icon: mdi:message-text-outline
 pause:
     name: pause living room TV
     initial: off
     icon: mdi:message-text-outline
+space_heater:
+    name: Space Heater
+    initial: off
+    icon: mdi:radiator
+occupancy:
+    name: Occupancy
+    icon: mdi:home
+    initial: on
+weekday_energy_saver:
+    name: Energy Savings Automations
+    initial: on
+    icon: mdi:power

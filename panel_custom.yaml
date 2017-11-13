@@ -1,10 +1,20 @@
 - name: floorplan
-  sidebar_title: Floorplan
+  sidebar_title: Floor-Main
   sidebar_icon: mdi:home
   url_path: floorplan
   config: !include floorplan.yaml
+- name: second_floor
+  sidebar_title: Floor-Second
+  sidebar_icon: mdi:home
+  url_path: second_floor
+  config: !include second_floor.yaml
+- name: basement
+  sidebar_title: Floor-Basement
+  sidebar_icon: mdi:home
+  url_path: basement
+  config: !include basement.yaml
 - name: remote
   sidebar_title: Remote
   sidebar_icon: mdi:remote
   url_path: remote
-  config: !include floorplan2.yaml
+  config: !include remote.yaml
